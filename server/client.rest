@@ -1,0 +1,10 @@
+### Testaa localhost:3001 hakua
+GET http://localhost:3001 HTTP/1.1
+
+### Testaa uuden nimen lisääminen
+POST http://localhost:3001/new HTTP/1.1
+Content-Type: application/json
+
+{
+    "name":"Pekka"
+}
