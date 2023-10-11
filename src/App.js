@@ -34,21 +34,32 @@ function App() {
         alert(error)
 
       })
+
+
     }
+
+    const remove = (name) => {
+      axios.delete(`${URL}/delete/${name}`)
+      .then(() => {
+        const tempPersons = [...persons]
+        tempPersons.splice(tempPersons.findIndex(e => e.name===name), 1)
+        setPersons(tempPersons)
+      })
+  }
 
   return (
     <div>
-      <h3>My favourite teachers</h3>
+      <h3>Muistilista</h3>
       <form onSubmit={save}>
-        <label>New teacher</label>
+        <label>Lisää listalle</label>
         <input value={newPerson} onChange={e => setNewPerson(e.target.value)}/>
         <button>Save</button>
       </form>
       <ul>
         {
-          persons.map(person => {
-              return <li>{person.name}</li>
-          })
+          persons.map(person => (
+            <li>{person.name} <a href="#" onClick={() => remove(person.name)}>Delete</a></li>
+          ))
         }
       </ul>
     </div>

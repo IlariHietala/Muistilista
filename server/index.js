@@ -9,9 +9,9 @@ app.use(express.urlencoded({extended: false}))
 const port = 3001
 
 const names = [
-    {name: 'Jouni'},
-    {name: 'Tuula'},
-    {name: 'Teppo'}
+    {name: 'Maito'},
+    {name: 'Mehu'},
+    {name: 'Kynsilakka'}
 ]
 
 app.get("/",(req, res) => {
@@ -19,10 +19,17 @@ app.get("/",(req, res) => {
 })
 
 app.post("/new", (req,res) => {
-    names.push(req.body)
+    names.push(req.body) // {name : 'Markku'}
     res.status(200).json(req.body)
 
 })
+
+app.delete("/delete/:name",(req,res) => {
+    names.splice(names.findIndex(e => e.name===req.params.name),1)
+    console.log(names)
+    res.status(200).json(req.params.name)
+})
+
 
 app.listen(port, () => {
     //console.log("server is running on port " + port)
